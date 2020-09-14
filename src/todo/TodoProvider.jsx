@@ -5,7 +5,9 @@ const initialTodos = [
   {id: 2, text: 'this is todo 2', done: false},
   {id: 3, text: 'this is todo 3', done: false}
 ]
+
 export const TodosStateContext = createContext();
+export const TodosDispatchContext = createContext();
 
 const create = (text) => ({
   type: 'CREATE',
@@ -21,7 +23,6 @@ const toggle = (id) => ({
   type: 'TOGGLE',
   id
 })
-
 
 function todosReducer(state, action) {
   switch (action.type) {
@@ -51,8 +52,10 @@ export default function TodoProvider({children}) {
   const [state, dispatch] = useReducer(todosReducer, initialTodos)
 
   return (
-    <TodosStateContext.Provider value={{state, dispatch}}>
-      {children}
-    </TodosStateContext.Provider>
+    <TodosDispatchContext.Provider value={dispatch}>
+      <TodosStateContext.Provider value={state}>
+        {children}
+      </TodosStateContext.Provider>
+    </TodosDispatchContext.Provider>
   )
 }
