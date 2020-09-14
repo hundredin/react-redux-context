@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import TodoProvider from './TodoProvider'
-import { Actions, TodosStateContext, TodosDispatchContext } from './TodoProvider'
+import { Actions } from './TodoProvider'
+import { useTodosState, useTodosDispatch } from './todoHook'
 
 const TodoForm = () => {
   const [value, setValue] = useState('');
-  const dispatch = useContext(TodosDispatchContext);
+  const dispatch = useTodosDispatch();
   
   const handleAdd = () => {
     if (value) {
@@ -22,7 +23,7 @@ const TodoForm = () => {
 }
 
 const TodoItem = ({todo}) => {
-  const dispatch = useContext(TodosDispatchContext);
+  const dispatch = useTodosDispatch();
 
   const handleToggle = () => {
     dispatch(Actions.toggle(todo.id))
@@ -41,7 +42,7 @@ const TodoItem = ({todo}) => {
 }
 
 const TodoList = () => {
-  const state = useContext(TodosStateContext);
+  const state = useTodosState();
   return (
     <div>
       <ul>
