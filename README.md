@@ -17,3 +17,9 @@
 
 ## 5. Todo App refactoring #2
 - custom hook 을 이용해서 좀 더 단순하게 context 사용
+
+## 6. Basic Redux Todo App
+- 기본적인 Todo app 을 redux 를 이용해서 구현
+- createStore(reducer, [preloadedState], [enhancer])
+- applyMiddleware(...middlewares)
+- combineReducers(reducers)
