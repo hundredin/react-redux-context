@@ -10,7 +10,7 @@ const store = configureStore(initialState)
 const TodoApp = () => {
   return (
     <Provider store={store}>
-      <TodoThunk />
+      <TodoReduxApp />
     </Provider>
   )
 }

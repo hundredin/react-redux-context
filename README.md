@@ -29,3 +29,5 @@
 
 ## 8. Middleware - Thunk
 - thunkMiddleware 구현
+
+## 9. Reducer 에 immer 적용
