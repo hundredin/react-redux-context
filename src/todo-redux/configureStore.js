@@ -2,12 +2,14 @@ import { applyMiddleware, createStore } from 'redux'
 import logger from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import customLoggerMiddleware from './customLoggerMiddleware'
+import thunkMiddleware from './thunkMiddleware'
 import rootReducers from './modules'
 
 export default function configureStore(initialState) {
 
   const middleware = applyMiddleware(
-    customLoggerMiddleware
+    customLoggerMiddleware,
+    thunkMiddleware
   )
 
   const store = createStore(
