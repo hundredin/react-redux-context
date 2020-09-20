@@ -23,3 +23,6 @@
 - createStore(reducer, [preloadedState], [enhancer])
 - applyMiddleware(...middlewares)
 - combineReducers(reducers)
+
+## 7. Middleware - CustomLogger
+- redux-logger 를 대체하여 customLoggerMiddleware 구현
