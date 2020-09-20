@@ -31,3 +31,5 @@
 - thunkMiddleware 구현
 
 ## 9. Reducer 에 immer 적용
+
+## 10. Refactoring Reducer - createReducer

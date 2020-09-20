@@ -1,4 +1,5 @@
-import produce from 'immer'
+import createReducer from '../createReducer'
+
 const CREATE = 'TODO/CREATE'
 const REMOVE = 'TODO/REMOVE'
 const TOGGLE = 'TODO/TOGGLE'
@@ -32,34 +33,24 @@ export const Actions = {
   toggle
 }
 
-export default function todoReducer(state = initialState, action ) {
-  switch (action.type) {
-    case CREATE:
-      const nextId = Math.max(...state.todos.map(todo => todo.id)) + 1;
-      
-      return produce(state, draft => {
-        draft.todos.push({
-          id: nextId,
-          text: action.payload,
-          done: false
-        })
-      })
-    case TOGGLE:
-      return produce(state, draft => {
-        const todo = draft.todos.find(todo => todo.id === action.payload)
-        todo.done = !todo.done
-      });
-    case REMOVE:
-      // return Object.assign({}, state, {
-      //   todos: state.todos.filter(todo => todo.id !== action.payload)
-      // })
-      // 사실 이런건 immer 를 쓰는 것보다 기존 filter 방식을 쓰는게 더 직관적이긴 하다.
-      return produce(state, draft => {
-        const index = draft.todos.findIndex(todo => todo.id === action.payload)
-        draft.todos.splice(index, 1)
-      })
-
-    default:
-      return state
+const todoReducer = createReducer(initialState, {
+  [CREATE]: (state, action) => {
+    const nextId = Math.max(...state.todos.map(todo => todo.id)) + 1;
+        
+    state.todos.push({
+      id: nextId,
+      text: action.payload,
+      done: false
+    })
+  },
+  [TOGGLE]: (state, action) => {
+    const todo = state.todos.find(todo => todo.id === action.payload)
+    todo.done = !todo.done    
+  },
+  [REMOVE]: (state, action) => {
+    const index = state.todos.findIndex(todo => todo.id === action.payload)
+    state.todos.splice(index, 1)
   }
-}
+})
+
+export default todoReducer
